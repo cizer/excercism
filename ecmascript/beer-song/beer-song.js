@@ -19,17 +19,17 @@ export default  {
             return number === 1 ? `it` : `one`;
         };
 
-        const getFirstLine = (number) => `${capitalizeFirstLetter(getBottles(number))} of beer on the wall, ${getBottles(number)} of beer.\n`;
+        const getFirstLine = (number) => `${capitalizeFirstLetter(getBottles(number))} of beer on the wall, ${getBottles(number)} of beer.`;
 
         const getLastLine = (number) => {
             if (number > 0) {
-                return `Take ${getPronoun(number)} down and pass it around, ${getBottles(number - 1)} of beer on the wall.\n`
+                return `Take ${getPronoun(number)} down and pass it around, ${getBottles(number - 1)} of beer on the wall.`
             } else {
-                return `Go to the store and buy some more, ${getBottles(99)} of beer on the wall.\n`
+                return `Go to the store and buy some more, ${getBottles(99)} of beer on the wall.`
             }
         };
 
-        return (getFirstLine(number) + getLastLine(number))
+        return (getFirstLine(number) + `\n` + getLastLine(number) + `\n`)
     },
 
     sing(start, end)
@@ -37,11 +37,10 @@ export default  {
         start = start || 99;
         end = end || 0;
 
-        let song = ``;
-        for (let i = start; i >= end; i--) {
-            song += this.verse(i);
-            song += i !== end ? '\n' : ``
-        }
-        return song;
+        const range = (start = null, end = null) => Array.from({length: start - end + 1}, (v, k) => start--);
+
+        return range(start, end)
+            .map((number, i, arr) => this.verse(number) + (arr[i]===end ? `\n`: ``))
+            .join('\n').slice(0, -1);
     }
 }
