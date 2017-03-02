@@ -1,46 +1,34 @@
-export default  {
-    verse(number)
-    {
-        function capitalizeFirstLetter(string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-
-        const getBottles = (number) => {
-            if (number === 0) {
-                return `no more bottles`
-            }
-            if (number === 1) {
-                return `1 bottle`
-            }
-            return `${number} bottles`
-        };
-
-        const getPronoun = (number) => {
-            return number === 1 ? `it` : `one`;
-        };
-
-        const getFirstLine = (number) => `${capitalizeFirstLetter(getBottles(number))} of beer on the wall, ${getBottles(number)} of beer.`;
-
-        const getLastLine = (number) => {
-            if (number > 0) {
-                return `Take ${getPronoun(number)} down and pass it around, ${getBottles(number - 1)} of beer on the wall.`
-            } else {
-                return `Go to the store and buy some more, ${getBottles(99)} of beer on the wall.`
-            }
-        };
-
-        return (getFirstLine(number) + `\n` + getLastLine(number) + `\n`)
-    },
-
-    sing(start, end)
-    {
-        start = start || 99;
-        end = end || 0;
-
-        const range = (start = null, end = null) => Array.from({length: start - end + 1}, (v, k) => start--);
-
-        return range(start, end)
-            .map((number, i, arr) => this.verse(number) + (arr[i]===end ? `\n`: ``))
-            .join('\n').slice(0, -1);
+const verses = {
+    zeroBottles: `No more bottles of beer on the wall, no more bottles of beer.
+Go to the store and buy some more, 99 bottles of beer on the wall.\n`,
+    oneBottle: `1 bottle of beer on the wall, 1 bottle of beer.
+Take it down and pass it around, no more bottles of beer on the wall.\n`,
+    twoBottles: `2 bottles of beer on the wall, 2 bottles of beer.
+Take one down and pass it around, 1 bottle of beer on the wall.\n`,
+    manyBottles: (bottles) => {
+        return `${bottles} bottles of beer on the wall, ${bottles} bottles of beer.
+Take one down and pass it around, ${bottles - 1} bottles of beer on the wall.\n`
     }
+}
+
+const verse = (bottles) => {
+    if (bottles === 0) return verses.zeroBottles
+    if (bottles === 1) return verses.oneBottle
+    if (bottles === 2) return verses.twoBottles
+    return verses.manyBottles(bottles)
+}
+
+const range = (start, end) =>
+    Array.from({length: start - end + 1}, (v, k) => start--)
+
+const sing = (start = 99, end = 0) => {
+
+    return range(start, end)
+        .map((bottle, i, arr) => verse(bottle) + (arr[i] === end ? `\n` : ``))
+        .join('\n').slice(0, -1)
+}
+
+export default {
+    verse,
+    sing
 }
