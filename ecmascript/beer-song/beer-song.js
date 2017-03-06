@@ -19,14 +19,13 @@ const verse = (bottles) => {
 }
 
 const range = (start, end) =>
-    Array.from({length: start - end + 1}, (v, k) => start--)
+    Array.from({length: start - end + 1}, () => start--)
 
-const sing = (start = 99, end = 0) => {
-
-    return range(start, end)
-        .map((bottle, i, arr) => verse(bottle) + (arr[i] === end ? `\n` : ``))
+const sing = (start = 99, end = 0) =>
+    range(start, end)
+        .map((bottle, i, arr) =>
+            verse(bottle) + (arr[i] === end ? `\n` : ``))
         .join('\n').slice(0, -1)
-}
 
 export default {
     verse,
