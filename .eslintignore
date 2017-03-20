@@ -1,3 +1,4 @@
 node_modules
+babel-output
 *.spec.js
 gulpfile.js
