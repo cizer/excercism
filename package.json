@@ -1,0 +1,24 @@
+{
+  "name": "exercism",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cizer/excercism.git"
+  },
+  "author": "Richie Mackay",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cizer/excercism/issues"
+  },
+  "homepage": "https://github.com/cizer/excercism#readme",
+  "devDependencies": {
+    "eslint": "3.18.0",
+    "eslint-config-airbnb-base": "11.1.1",
+    "eslint-plugin-import": "2.2.0"
+  }
+}

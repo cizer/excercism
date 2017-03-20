@@ -18,30 +18,25 @@ const gulp = require('gulp'),
   babel = require('gulp-babel'),
   polyfill = require('babel/polyfill'),
   del = require('del'),
-  argv  = require('yargs').argv,
+  argv = require('yargs').argv,
   inputDir = getInputDirectory(argv),
   outputDir = getOutputDirectory(argv);
 
 // Gulp tasks definition
 
-gulp.task('default', [ 'test' ]);
+gulp.task('default', ['test']);
 
-gulp.task('test', [ 'babel' ], function () {
-  return gulp.src([ outputDir + '/*.spec.js' ])
-    .pipe(jasmine());
-});
+gulp.task('test', ['babel'], () => gulp.src([`${outputDir}/*.spec.js`])
+    .pipe(jasmine()));
 
-gulp.task('babel', function () {
-  return gulp.src([ inputDir + '/*.js', inputDir + '/lib/*.js' ])
+gulp.task('babel', () => gulp.src([`${inputDir}/*.js`, `${inputDir}/lib/*.js`])
     .pipe(babel())
-    .pipe(gulp.dest(outputDir));
-});
+    .pipe(gulp.dest(outputDir)));
 
-gulp.task('lint', function () {
-  return gulp.src([ inputDir + '/*.js' ])
+gulp.task('lint', () => gulp.src([`${inputDir}/*.js`])
     .pipe(eslint({
       envs: [
-        'es6'  //turns on all es6 features except modules
+        'es6',  // turns on all es6 features except modules
       ],
       rules: {
         // full documentation here : http://eslint.org/docs/rules
@@ -74,16 +69,15 @@ gulp.task('lint', function () {
         'no-unreachable': 2, // detects unreachable statements (after return, throw,...)
         'use-isnan': 2, // do not compare with `NaN` value, use isNan() instead
         'valid-jsdoc': 2, // ensure JSDoc comments are valid
-        'valid-typeof': 2 // ensure that the results of typeof are compared against a valid string
+        'valid-typeof': 2, // ensure that the results of typeof are compared against a valid string
       },
       ecmaFeatures: {
-        'modules': true  //this gives us modules :)
-      }
+        modules: true,  // this gives us modules :)
+      },
     }))
     .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
-});
+    .pipe(eslint.failAfterError()));
 
-gulp.task('clean', function (cb) {
-  del([ outputDir ], cb);
+gulp.task('clean', (cb) => {
+  del([outputDir], cb);
 });
