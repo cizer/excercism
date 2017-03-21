@@ -17,7 +17,7 @@ const verse = (bottles) => {
 };
 
 const range = (start, end) =>
-    Array.from({ length: start - end + 1 }, () => start--);
+    Array.from({ length: (start - end) + 1 }, () => start--);
 
 const sing = (start = 99, end = 0) =>
     range(start, end)

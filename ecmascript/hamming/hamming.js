@@ -5,9 +5,12 @@ export default function () {
         throw new Error('DNA strands must be of equal length.');
       }
 
-      return [...strand1].reduce((distance, nucleotide, index) =>
-                    (nucleotide !== strand2[index]) ? ++distance : distance
-                , 0);
+      return [...strand1].reduce((distance, nucleotide, index) => {
+        if (nucleotide !== strand2[index]) {
+          return ++distance;
+        }
+        return distance;
+      }, 0);
     },
   };
 }

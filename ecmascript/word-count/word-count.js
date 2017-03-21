@@ -4,15 +4,19 @@ export default function () {
       const wordExistsAndIsNumber = (counts, word) => counts[word] && typeof counts[word] === 'number';
 
       const updateCounts = (counts, word) => {
-        wordExistsAndIsNumber(counts, word) ? counts[word]++ : counts[word] = 1;
+        if (wordExistsAndIsNumber(counts, word)) {
+          counts[word]++;
+        } else {
+          counts[word] = 1;
+        }
         return counts;
       };
 
       return sentence
-                .toLowerCase()
-                .trim()
-                .split(/[\s,]+/)
-                .reduce((counts, word) => updateCounts(counts, word), {});
+        .toLowerCase()
+        .trim()
+        .split(/[\s,]+/)
+        .reduce((counts, word) => updateCounts(counts, word), {});
     },
   };
 }
