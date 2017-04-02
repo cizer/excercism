@@ -2,5 +2,5 @@ extends: airbnb-base
 plugins:
   - import
 rules:
-  no-plusplus: off
-  no-param-reassign: off
+  no-plusplus: 0
+  no-param-reassign: 0
