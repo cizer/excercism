@@ -1,4 +1,4 @@
-function getDeepCopy(object) {
+function deepCopy(object) {
   return JSON.parse(JSON.stringify(object));
 }
 
@@ -7,7 +7,7 @@ export default function() {
 
   return {
     roster() {
-      return getDeepCopy(db);
+      return deepCopy(db);
     },
 
     add(name, grade) {
@@ -17,8 +17,8 @@ export default function() {
     },
 
     grade(grade) {
-      if (!db[grade]) return [];
-      return getDeepCopy(db)[grade];
+      return db[grade] ?
+        deepCopy(db[grade]) : [];
     },
   };
 }
