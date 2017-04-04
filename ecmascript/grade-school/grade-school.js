@@ -1,5 +1,5 @@
-function getDeepCopy(object){
-    return JSON.parse(JSON.stringify(object));
+function getDeepCopy(object) {
+  return JSON.parse(JSON.stringify(object));
 }
 
 export default function() {
@@ -11,25 +11,16 @@ export default function() {
     },
 
     add(name, grade) {
-      if (!db[grade]) {
-        db[grade] = [name];
-      } else {
-        let newDb = {};
-        Object.keys(db).forEach(key => {
-          key = parseInt(key, 10);
-          newDb[key] = Object.assign([], db[key]);
-          if (key === grade) {
-            newDb[key].push(name);
-          }
-          newDb[key].sort();
-        });
-        db = newDb;
-      }
+      !db[grade] ?
+        db[grade] = [name] :
+        db[grade].push(name);
+
+      db[grade].sort();
     },
 
-    grade(grade){
+    grade(grade) {
       if (!db[grade]) return [];
-      return getDeepCopy(db)[grade];//.sort();
+      return getDeepCopy(db)[grade];
     },
   };
 }
