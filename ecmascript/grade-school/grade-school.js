@@ -13,9 +13,7 @@ export default function() {
     add(name, grade) {
       !db[grade] ?
         db[grade] = [name] :
-        db[grade].push(name);
-
-      db[grade].sort();
+        db[grade] = [...db[grade], name].sort();
     },
 
     grade(grade) {
