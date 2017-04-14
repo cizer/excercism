@@ -1,17 +1,17 @@
 const letters = [
   'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I',
   'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
-  'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'
+  'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
 ];
 
-let nameHistory = new Set();
+const nameHistory = new Set();
 
 function getRandomNumber(max) {
   return Math.floor(Math.random() * (max + 1));
 }
 
 function getRandomFromList(list) {
-  return list[getRandomNumber(list.length -1)];
+  return list[getRandomNumber(list.length - 1)];
 }
 
 function getRandomDigits() {
@@ -31,12 +31,12 @@ function getRobotName() {
   return name;
 }
 
-export default function() {
+export default function () {
   let name = getRobotName();
 
   return {
     get name() {
-      return name
+      return name;
     },
     reset() {
       name = getRobotName();

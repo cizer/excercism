@@ -3,7 +3,7 @@ function deepCopy(object) {
 }
 
 export default function() {
-  let db = {};
+  const db = {};
 
   return {
     roster() {
